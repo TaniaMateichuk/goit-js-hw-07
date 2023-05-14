@@ -9,8 +9,6 @@ const galleryMarkup = createGalleryMarkup(galleryItems);
 
 galleryContainer.insertAdjacentHTML("beforeend", galleryMarkup);
 
-galleryContainer.addEventListener("click", onGalleryImageClick);
-
 function createGalleryMarkup(galleryItems) {
     return galleryItems
     .map(({ original, preview, description }) => {
@@ -23,13 +21,7 @@ function createGalleryMarkup(galleryItems) {
     }).join("");
 };
 
-function onGalleryImageClick(evt) {
-    evt.preventDefault();
-    if (!evt.target.classList.contains("gallery__image")) {
-        return
-    }
     const lightbox = new SimpleLightbox(".gallery a", {
-      captionsData: "alt",
-      captionDelay: "250"
+        captionsData: "alt",
+        captionDelay: "250"
     });
-}

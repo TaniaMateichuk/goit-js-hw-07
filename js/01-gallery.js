@@ -35,16 +35,22 @@ function onGalleryImageClick(evt) {
 
     console.log(evt.target)
 
-    const instance = basicLightbox.create(`
-    <img src="${evt.target.dataset.source}" width="800" height="600">
-`);
+    const instance = basicLightbox.create(
+        `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+        {
+        onShow: () =>
+            galleryContainer.addEventListener("keydown", onCloseModal),
+            onClose: () =>
+            galleryContainer.removeEventListener("keydown", onCloseModal),
+        }
+    );
 
     instance.show();
 
-    galleryContainer.addEventListener("keydown", (evt) => {
+    function onCloseModal (evt) {
         if (evt.code === "Escape") {
-        instance.close();
+            instance.close();
         }
-    });
+    };
 }
 
